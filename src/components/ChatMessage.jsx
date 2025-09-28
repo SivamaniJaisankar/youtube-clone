@@ -15,15 +15,15 @@ const ChatMessage = () => {
     
 
   return (
-    <div className="w-12/12 text-md flex items-center relative bottom-0">
+    <div className="w-12/12 p-2 text-md flex items-center relative bottom-0">
         <input
           type="text"
-          className="p-1 w-10/12 mx-2 my-2 rounded-md border border-slate-400 bg-slate-50 text-slate-900 outline-0"
+          className="p-1 w-10/12 mx-2 my-2 rounded-md border outline-0"
           name={message}
           onChange={(e)=>setMessage(e.target.value)}
         />
         <AiOutlineSend 
-          className="w-2/12 p-1 mx-1 h-8 text-xl rounded-md border border-slate-400 bg-slate-50 text-slate-900 cursor-pointer"
+          className="w-1/12 py-1 mx-1 h-8 text-md rounded-md border cursor-pointer hover:border-slate-900 hover:text-slate-700"
           onClick={handleSendMessage}
         />
       </div>

@@ -9,9 +9,9 @@ import { TbMoon } from "react-icons/tb";
 const Header = () => {
 
   const {handleSidebar, theme, handleTheme} = useContext(MenuContext);
-
+  
   return (
-    <div className={`w-12/12 h-20 flex justify-between  ${theme === 'light' ? 'bg-white' : 'bg-slate-800'}`}>
+    <div className={`w-12/12 h-20 flex justify-between ${theme === 'light' ? 'bg-white' : 'bg-slate-800'}`}>
       <div className="w-3/12 flex items-center">
         <RxHamburgerMenu className={`w-9 p-2 h-9 cursor-pointer ${theme === 'light' ? 'text-slate-500' : 'text-white'}`} onClick={handleSidebar}/>
         <div className="w-24 cursor-pointer">
@@ -37,4 +37,3 @@ const Header = () => {
 export default Header;
 
 
-//className="w-8/12 flex items-center justify-center"

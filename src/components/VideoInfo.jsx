@@ -8,6 +8,7 @@ import { PiShareFatLight } from "react-icons/pi";
 import { TfiDownload } from "react-icons/tfi";
 
 
+
 const VideoInfo = () => {
 
     const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -28,7 +29,7 @@ const VideoInfo = () => {
   
 return (
     <div>
-      <iframe width="775" height="375"
+      <iframe width="750" height="375"
                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
                 title="YouTube video player"
                 allow="autoplay"
@@ -37,20 +38,20 @@ return (
       />
       {videoInfo.map((v) => (
           <div key={v.id}>
-            <h2 className="my-1 p-1 text-lg font-semibold">{v.snippet.title}</h2>
+            <h2 className="my-1 p-1 text-md font-roboto font-semibold">{v.snippet.title}</h2>
             <div className="text-sm flex justify-between">
-              <div className="w-6/12 px-4 font-semibold rounded-sm shadow-sm shadow-slate-400 bg-slate-50 text-slate-500 flex items-center">
-                <p className="cursor-pointer mr-4 ">{v.snippet.channelTitle}</p>
-                <p>{formatDistanceToNow(new Date(v.snippet.publishedAt), {addSuffix: true})}</p>
+              <div className="w-6/12 pr-4 font-semibold font-roboto flex items-center">
+                <p className="cursor-pointer mr-2 px-2 py-1 text-md rounded-md">{v.snippet.channelTitle}</p>
+                <p className="text-xs">{formatDistanceToNow(new Date(v.snippet.publishedAt), {addSuffix: true})}</p>
               </div>
-              <div className="w-6/12 p-1 shadow-sm bg-slate-50 text-slate-500 flex justify-between">
-                <p className="py-1 px-4 font-semibold rounded-sm shadow-sm shadow-slate-400 bg-slate-50 text-slate-500 cursor-pointer flex items-center justify-between">
+              <div className="w-6/12 p-1 flex justify-between">
+                <p className="py-1 px-4 font-semibold font-roboto text-md cursor-pointer flex items-center justify-between">
                     <AiOutlineLike className="text-lg" />{formatNumber(v.statistics.likeCount)}
                 </p>
-                <p className="py-1 px-4 font-semibold rounded-sm shadow-sm shadow-slate-400 bg-slate-50 text-slate-500 cursor-pointer flex items-center justify-between">
+                <p className="py-1 px-4 font-semibold font-roboto text-md cursor-pointer flex items-center justify-between">
                   <PiShareFatLight className="text-lg" /> Share
                 </p>
-                <p className="py-1 px-4 font-semibold rounded-sm shadow-sm shadow-slate-400 bg-slate-50 text-slate-500 cursor-pointer flex items-center justify-between">
+                <p className="py-1 px-4 font-semibold font-roboto text-md cursor-pointer flex items-center justify-between">
                   <TfiDownload className="text-lg" />
                   Download
                 </p>

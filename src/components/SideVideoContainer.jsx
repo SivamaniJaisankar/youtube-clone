@@ -29,15 +29,16 @@ const SideVideoContainer = () => {
   };
 
   return (
-    <div className="border border-slate-300 bg-slate-100 ml-5 mr-3 my-2 shadow-sm rounded-md space-y-5 overflow-y-scroll hide-scrollbar">
+    <div className="ml-5 mr-3 my-2 shadow-sm rounded-md space-y-5 overflow-y-scroll hide-scrollbar">
+      <h3 className="text-md font-bold font-roboto">Suggestions...</h3>
       {videoInfo.map((v) => (
         <Link key={v.id} to={`/watch/${v.id}`}>
-          <div className="w-11/12 mx-auto my-5 h-32 flex justify-between border border-slate-500 bg-slate-100 text-slate-500 rounded-md shadow-xl cursor-pointer">
-            <img className="p-2 w-7/12 text-xs rounded-xl" src={v.snippet.thumbnails.medium.url} alt={v.snippet.title} />
-            <div className="w-5/12">
-              <p className="m-1 text-xs font-semibold">{v.snippet.title.substring(0, 60)}...</p>
-              <p className="my-2 text-sm font-light">{v.snippet.channelTitle}</p>
-              <div className="my-1 flex text-xs font-thin">
+          <div className="w-11/12 mx-auto my-5 h-32 flex justify-between rounded-md cursor-pointer">
+            <img className="p-2 w-6/12 text-xs rounded-xl" src={v.snippet.thumbnails.medium.url} alt={v.snippet.title} />
+            <div className="w-6/12">
+              <p className="m-1 text-xs font-semibold font-roboto">{v.snippet.title.substring(0, 60)}...</p>
+              <p className="my-2 text-xs font-light font-roboto">{v.snippet.channelTitle}</p>
+              <div className="my-1 flex text-xs font-light font-roboto">
                 <p className="mr-4">{formatNumber(v.statistics.viewCount)}</p>
                 <p>{formatDistanceToNow(new Date(v.snippet.publishedAt), {addSuffix: true})}</p>
               </div>

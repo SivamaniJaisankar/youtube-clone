@@ -8,7 +8,6 @@ export const formatNumber = (num) => {
     }
 }
 
-
 let nameList = [
   'Time', 'Past', 'Future', 'Dev',
   'Fly', 'Flying', 'Soar', 'Soaring', 'Power', 'Falling',

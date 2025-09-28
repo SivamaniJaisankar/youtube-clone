@@ -12,7 +12,7 @@ const AppLayout = () => {
   return (
     <Provider store={store}>
     <MenuProvider>
-    <div className="overflow-y-scroll">
+    <div className="overflow-y-scroll hide-scrollbar">
         <Header />
         <Outlet />
       </div>

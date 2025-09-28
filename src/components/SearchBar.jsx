@@ -17,7 +17,6 @@ const SearchBar = () => {
 
 
   const handleSearchInput = (input) => {
-    console.log(typeof input, input)
     const value = typeof input === "string" ? input : input.target.value;
 
     setSearchText(value);
@@ -65,14 +64,14 @@ const SearchBar = () => {
     <>
       <div className="w-12/12 flex">
         <input
-          className="w-7/12 px-2 py-1 outline-0 rounded-l-xl border border-slate-200 text-slate-600"
+          className={`w-7/12 px-2 py-1 outline-0 rounded-l-xl border border-slate-200 ${theme === "light" ? "text-slate-600": "bg-slate-800 text-white"} text-xs sm:text-sm font-roboto`}
           placeholder="Search"
           value={searchText}
           onChange={handleSearchInput}
           onFocus={() => setShowSearch(true)}
           onBlur={() => setTimeout(()=> setShowSearch(false), 150)}
         />
-        <div className={`w-1/12 py-2 outline-0 rounded-r-xl ${theme === "light" ? "bg-slate-200 text-slate-800": "bg-slate-800 text-white"} border border-slate-200 cursor-pointer hover:text-slate-900 hover:border-slate-500`}>
+        <div className={`w-1/12 py-2 flex items-center outline-0 rounded-r-xl ${theme === "light" ? "bg-slate-100 text-slate-600": "bg-slate-800 text-white"} border border-slate-200 cursor-pointer hover:text-slate-900 hover:border-slate-500`}>
           <CiSearch
             className={`w-12/12`}
             onClick={() => handleSearchInput(searchText)}
@@ -85,7 +84,7 @@ const SearchBar = () => {
             <Link to={`/watch/${s?.id}`} key={s?.id} className="flex items-center">
               <CiSearch />
               <p
-                className="my-1 px-1 py-2 text-slate-900 cursor-pointer hover:bg-amber-200 hover:rounded-sm"
+                className="my-1 px-1 py-1 text-slate-900 cursor-pointer hover:bg-amber-200 hover:rounded-sm font-roboto"
               >
                 {s?.title}
               </p>

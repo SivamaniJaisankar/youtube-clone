@@ -7,7 +7,7 @@
 - **Sidebar**: Displays a list of different sections.
 - **Main Container**:
   - Category List
-  - Video Container
+  - Video Container(with Infinite Scroll implemented)
 
 ### Watch Page
 - **Top Section**:
@@ -20,11 +20,3 @@
   - Video Suggestions
 
 
-
-
-
-
-
-
-
-     

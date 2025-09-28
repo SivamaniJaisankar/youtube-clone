@@ -1,92 +1,96 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { YOUTUBE_VIDEOSLIST_API } from "../utils/constants";
-import { formatDistanceToNow } from "date-fns";
 import { Link, useNavigate } from "react-router-dom";
-import { formatNumber } from "../utils/helper";
-import { TiEyeOutline } from "react-icons/ti";
-import { GrChannel } from "react-icons/gr";
-import { BsClockHistory } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { setSuggestions } from "../utils/slices/videoSuggestionSlice";
 import MenuContext from "../utils/MenuContext";
+import VideoCard from "./VideoCard";
+import VideoCardShimmer from "./VideoCardShimmer";
 
 const VideoContainer = ({ categoryId }) => {
-  const { theme, showSidebar } = useContext(MenuContext);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const suggestions = useSelector((state) => state?.videoSuggestion);
+  
+  const { theme, showSidebar } = useContext(MenuContext);
+  const  suggestions  = useSelector((state) => state?.videoSuggestion);
+  const existingItems = suggestions[categoryId] || [];
+  
 
+  const loader = useRef(null)
   const [videoInfo, setVideoInfo] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [pageToken, setPageToken] = useState(null);
 
-  const fetchData = async () => {
+
+  const fetchData = async (pageToken='') => {
+    setLoading(true);
+
     let url = "";
     if (categoryId === 0) {
-      url = YOUTUBE_VIDEOSLIST_API;
+      url = YOUTUBE_VIDEOSLIST_API + "&pageToken=" + pageToken;
     } else {
-      url = YOUTUBE_VIDEOSLIST_API + "&videoCategoryId=" + categoryId;
-    }
+      url = YOUTUBE_VIDEOSLIST_API + "&videoCategoryId=" + categoryId + "&pageToken=" + pageToken;
+    } 
 
-    if (categoryId in suggestions) {
-      setVideoInfo(suggestions[categoryId]);
+    
+    if (pageToken === '' && categoryId in suggestions) {
+      setVideoInfo(existingItems);
     } else {
       try {
         const data = await fetch(url);
-        if (!data.ok) {
-          throw new Error(`${data.status}`);
-        }
+        if (!data.ok)  throw new Error(`${data.status}`);
+    
         const json = await data.json();
+      
         setVideoInfo((prev) => [...prev, ...json.items]);
-        dispatch(setSuggestions({ id: categoryId, items: json.items }));
+        setPageToken(json.nextPageToken);
+        const items = [...existingItems, ...json.items]
+        dispatch(setSuggestions({ id: categoryId, items: items }));
       } catch (err) {
         navigate("/error", {
           state: { errStatus: err.message, errMessage: "Failed To Fetch" },
         });
       }
     }
+    setLoading(false);
   };
 
   useEffect(() => {
+    setVideoInfo([]);
     fetchData();
-  }, []);
+  },[categoryId]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if(entries[0].isIntersecting && pageToken && !loading){
+        fetchData(pageToken)
+      }
+    }, { threshold: 1})
+
+    if(loader.current){
+      observer.observe(loader.current)
+    }
+
+    return () =>{
+      if(loader.current) observer.unobserve(loader.current)
+    }
+
+  },[pageToken, loading])
+
+  
 
   return (
-    <div
-      className={`grid ${
-        showSidebar ? "grid-cols-3" : "grid-cols-4"
-      } space-y-8 h-[845px]`}
-    >
+    <div className="flex flex-col">
+    <div className={`grid ${showSidebar ? "grid-cols-3" : "grid-cols-4"} space-y-8`}>
       {videoInfo?.map((v) => (
         <Link key={v.id} to={`/watch/${v.id}`}>
-          <div className="h-72 mx-2 flex flex-col justify-between hover:shadow-xs hover:shadow-slate-600 rounded-sm cursor-pointer overflow-y-scroll hide-scrollbar">
-            <img
-              className={`h-48 p-2`}
-              src={v?.snippet?.thumbnails?.medium?.url}
-              alt={v.snippet.title}
-            />
-            <p className={`${theme === 'light' ? 'bg-white text-slate-800' : 'bg-slate-800 text-white'} my-1 mx-1 font-bold text-xs`}>
-              {v.snippet.title}
-            </p>
-            <span className="m-1 flex items-center">
-              <GrChannel className="text-md mx-1" />
-              <p className={`${theme === 'light' ? 'bg-white text-slate-800' : 'bg-slate-800 text-white'} text-xs`}>{v.snippet.channelTitle}</p>
-            </span>
-            <div className="m-1 flex text-xs text-slate-700">
-              <span className="mr-4 flex items-center">
-                <TiEyeOutline className={`${theme === 'light' ? 'bg-white text-slate-800' : 'bg-slate-800 text-white'} text-xl`} />
-                <p className={`${theme === 'light' ? 'bg-white text-slate-800' : 'bg-slate-800 text-white'}`}>{formatNumber(v.statistics.viewCount)}</p>
-              </span>
-              <span className="flex items-center text-slate-700">
-                <BsClockHistory className={`${theme === 'light' ? 'bg-white text-slate-800' : 'bg-slate-800 text-white'} text-xs mr-1`} />
-                <p className = {`${theme === 'light' ? 'bg-white text-slate-800' : 'bg-slate-800 text-white'}`}>
-                  {formatDistanceToNow(new Date(v.snippet.publishedAt), {
-                    addSuffix: true,
-                  })}
-                </p>
-              </span>
-            </div>
-          </div>
+          <VideoCard v={v}/>
         </Link>
       ))}
+    </div>
+    {loading && (<VideoCardShimmer />) }
+    <div ref={loader} />
     </div>
   );
 };
