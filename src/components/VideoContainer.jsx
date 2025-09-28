@@ -78,11 +78,12 @@ const VideoContainer = ({ categoryId }) => {
 
   },[pageToken, loading])
 
+
   
 
   return (
     <div className="flex flex-col">
-    <div className={`grid ${showSidebar ? "grid-cols-3" : "grid-cols-4"} space-y-8`}>
+    <div className={`grid w-96 sm:w-full ${showSidebar ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-1 sm:grid-cols-4"} space-y-8`}>
       {videoInfo?.map((v) => (
         <Link key={v.id} to={`/watch/${v.id}`}>
           <VideoCard v={v}/>

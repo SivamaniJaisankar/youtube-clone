@@ -21,13 +21,13 @@ const Header = () => {
         />
         </div>
       </div>
-      <div className="w-7/12 flex flex-col items-center justify-center">
+      <div className="ml-5 sm:ml-0 w-7/12 flex flex-col items-center justify-center">
         <SearchBar />
       </div> 
       <div className="w-2/12 flex items-center justify-center">
         
-        <TbMoon onClick={handleTheme} className={`mx-5 text-3xl rounded-2xl shadow-sm shadow-slate-400 cursor-pointer ${theme === 'light' ? 'text-slate-500' : 'text-white'}`}/> 
-        <CgProfile className={`text-3xl rounded-3xl shadow-sm shadow-slate-400 cursor-pointer ${theme === 'light' ? 'text-slate-500' : 'text-white'}`}/>
+        <TbMoon onClick={handleTheme} className={`mx-2 sm:mx-5 text-xl sm:text-3xl rounded-2xl shadow-sm shadow-slate-400 cursor-pointer ${theme === 'light' ? 'text-slate-500' : 'text-white'}`}/> 
+        <CgProfile className={`text-xl sm:text-3xl rounded-3xl shadow-sm shadow-slate-400 cursor-pointer ${theme === 'light' ? 'text-slate-500' : 'text-white'}`}/>
 
       </div>
     </div>

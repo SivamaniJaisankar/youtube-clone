@@ -38,7 +38,7 @@ const CommentList = ({ comment }) => {
           <img
             src={autheorImage}
             alt="Profile Image"
-            className="rounded-3xl h-9 w-9 text-sm cursor-pointer"
+            className="rounded-3xl h-7 sm:h-9 w-7 sm:w-9 text-sm cursor-pointer"
           />
         </div>
         <div className="w-12/12 my-1 py-1">

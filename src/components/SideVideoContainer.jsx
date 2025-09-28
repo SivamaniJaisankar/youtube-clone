@@ -29,8 +29,8 @@ const SideVideoContainer = () => {
   };
 
   return (
-    <div className="ml-5 mr-3 my-2 shadow-sm rounded-md space-y-5 overflow-y-scroll hide-scrollbar">
-      <h3 className="text-md font-bold font-roboto">Suggestions...</h3>
+    <div className="sm:ml-5 sm:mr-3 my-2 shadow-xs rounded-md space-y-5 overflow-y-scroll hide-scrollbar">
+      <h3 className="text-md font-bold font-roboto p-2">Suggestions...</h3>
       {videoInfo.map((v) => (
         <Link key={v.id} to={`/watch/${v.id}`}>
           <div className="w-11/12 mx-auto my-5 h-32 flex justify-between rounded-md cursor-pointer">

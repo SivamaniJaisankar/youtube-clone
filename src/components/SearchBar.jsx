@@ -64,14 +64,14 @@ const SearchBar = () => {
     <>
       <div className="w-12/12 flex">
         <input
-          className={`w-7/12 px-2 py-1 outline-0 rounded-l-xl border border-slate-200 ${theme === "light" ? "text-slate-600": "bg-slate-800 text-white"} text-xs sm:text-sm font-roboto`}
+          className={`w-7/12 px-2 py-0 sm:py-1 outline-0 rounded-l-xl border border-slate-200 ${theme === "light" ? "text-slate-600": "bg-slate-800 text-white"} text-xs sm:text-sm font-roboto`}
           placeholder="Search"
           value={searchText}
           onChange={handleSearchInput}
           onFocus={() => setShowSearch(true)}
           onBlur={() => setTimeout(()=> setShowSearch(false), 150)}
         />
-        <div className={`w-1/12 py-2 flex items-center outline-0 rounded-r-xl ${theme === "light" ? "bg-slate-100 text-slate-600": "bg-slate-800 text-white"} border border-slate-200 cursor-pointer hover:text-slate-900 hover:border-slate-500`}>
+        <div className={`w-1/12 p-1 sm:py-2 flex items-center outline-0 rounded-r-xl ${theme === "light" ? "bg-slate-100 text-slate-600": "bg-slate-800 text-white"} border border-slate-200 cursor-pointer hover:text-slate-900 hover:border-slate-500`}>
           <CiSearch
             className={`w-12/12`}
             onClick={() => handleSearchInput(searchText)}

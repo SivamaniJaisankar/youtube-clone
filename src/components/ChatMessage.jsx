@@ -11,6 +11,7 @@ const ChatMessage = () => {
 
     const handleSendMessage = () => {
         dispatch(addMessage({ name: 'Sivamani', message: message }));
+        setMessage('');
     }
     
 
@@ -19,7 +20,7 @@ const ChatMessage = () => {
         <input
           type="text"
           className="p-1 w-10/12 mx-2 my-2 rounded-md border outline-0"
-          name={message}
+          value={message}
           onChange={(e)=>setMessage(e.target.value)}
         />
         <AiOutlineSend 

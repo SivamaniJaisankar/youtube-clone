@@ -4,7 +4,8 @@ const MenuContext = createContext();
 
 export const MenuProvider = ({children}) => {
     const [showSidebar, setShowSidebar] = useState(true); 
-    const [theme, setTheme] = useState('light')
+    const [theme, setTheme] = useState('light');
+    const [isMobile, setIsMobile] = useState(false);
 
     const handleSidebar = () => {
         setShowSidebar(!showSidebar)
@@ -15,7 +16,7 @@ export const MenuProvider = ({children}) => {
     }
     
     return(
-        <MenuContext.Provider value={{showSidebar, setShowSidebar, handleSidebar, theme, setTheme, handleTheme}}>
+        <MenuContext.Provider value={{showSidebar, setShowSidebar, handleSidebar, theme, setTheme, handleTheme, isMobile, setIsMobile}}>
             {children}
         </MenuContext.Provider>
     )

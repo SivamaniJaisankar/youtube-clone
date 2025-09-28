@@ -6,12 +6,14 @@ import WatchPage from "./components/WatchPage";
 import HandleError from './components/HandleError'
 import { Provider } from "react-redux";
 import { store } from "./utils/Store";
+import MobileWarning from "./components/MobileWarning";
 
 
 const AppLayout = () => {
   return (
     <Provider store={store}>
     <MenuProvider>
+    <MobileWarning />
     <div className="overflow-y-scroll hide-scrollbar">
         <Header />
         <Outlet />

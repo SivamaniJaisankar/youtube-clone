@@ -7,7 +7,7 @@ import { YOUTUBE_VIDEO_CATEGORY_API } from "../utils/constants";
 
 
 const Body = () => {
-  const { theme, showSidebar } = useContext(MenuContext);
+  const { theme, showSidebar, isMobile } = useContext(MenuContext);
   const [category, setCategory] = useState([]);
   const [categoryId, setCategoryId] = useState(0);
   
@@ -27,7 +27,7 @@ const Body = () => {
 
   return (
     <div className={`${theme === 'light' ? 'bg-white text-slate-800' : 'bg-slate-800 text-white'} w-12/12 flex h-[936px] overflow-y-scroll hide-scrollbar`}>
-      <Sidebar className={`${showSidebar ? 'w-2/12' : 'w-[50px]' }`}/>
+      {!isMobile && <Sidebar className={`${showSidebar ? 'w-2/12' : 'w-[50px]' }`}/> }
       <div className={`${showSidebar ? 'w-10/12' : 'w-[1300px]' } mx-auto`}>
         <ButtonList category={category} categoryId={categoryId} setCategoryId={setCategoryId} />
         <VideoContainer categoryId={categoryId} />
