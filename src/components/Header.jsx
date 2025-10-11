@@ -9,24 +9,27 @@ import { TbMoon } from "react-icons/tb";
 const Header = () => {
 
   const {handleSidebar, theme, handleTheme} = useContext(MenuContext);
+
+  const themeClass = theme === "light" ? "bg-white text-slate-800" : "bg-slate-800 text-white";
   
   return (
-    <div className={`w-12/12 h-20 flex justify-between ${theme === 'light' ? 'bg-white' : 'bg-slate-800'}`}>
+    <div className={`w-12/12 h-20 flex justify-between ${themeClass}`}>
       <div className="w-3/12 flex items-center">
-        <RxHamburgerMenu className={`w-9 p-2 h-9 cursor-pointer ${theme === 'light' ? 'text-slate-500' : 'text-white'}`} onClick={handleSidebar}/>
+        <RxHamburgerMenu className={`w-9 p-2 h-9 cursor-pointer ${themeClass}`} onClick={handleSidebar}/>
         <div className="w-24 cursor-pointer">
         <img
           src={YOUTUBE_LOGO}
-          alt="YouTube Logo"
+          alt="Header Logo"
+          className="w-12 h-12"
         />
         </div>
       </div>
-      <div className="ml-5 sm:ml-0 w-7/12 flex flex-col items-center justify-center">
+      <div className="ml-5 sm:ml-0 w-10/12 sm:w-7/12 flex flex-col items-center justify-center">
         <SearchBar />
       </div> 
       <div className="w-2/12 flex items-center justify-center">
         
-        <TbMoon onClick={handleTheme} className={`mx-2 sm:mx-5 text-xl sm:text-3xl rounded-2xl shadow-sm shadow-slate-400 cursor-pointer ${theme === 'light' ? 'text-slate-500' : 'text-white'}`}/> 
+        <TbMoon  aria-label="Toggle theme" onClick={handleTheme} className={`mx-2 sm:mx-5 text-xl sm:text-3xl rounded-2xl shadow-sm shadow-slate-400 cursor-pointer ${theme === 'light' ? 'text-slate-500' : 'text-white'}`}/> 
         <CgProfile className={`text-xl sm:text-3xl rounded-3xl shadow-sm shadow-slate-400 cursor-pointer ${theme === 'light' ? 'text-slate-500' : 'text-white'}`}/>
 
       </div>

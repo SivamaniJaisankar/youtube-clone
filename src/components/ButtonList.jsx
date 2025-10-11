@@ -1,13 +1,9 @@
-import { useContext } from "react";
-import MenuContext from "../utils/MenuContext";
-
+import React from "react";
 
 const ButtonList = ({category, categoryId, setCategoryId}) => {
   
-  const { theme } = useContext(MenuContext);
-
   return (
-    <div className="rounded-md flex items-start w-12/12 my-5 p-2 overflow-x-scroll hide-scrollbar">
+    <div className="rounded-md flex items-start w-full my-5 p-2 overflow-x-auto hide-scrollbar">
       <button 
         className=
     {`${0 === categoryId ? 'bg-slate-600 text-white' :'bg-white text-slate-500'}
@@ -19,9 +15,9 @@ const ButtonList = ({category, categoryId, setCategoryId}) => {
       >
         All
       </button>
-      {category.map((c) => (
+      {category?.map((c, index) => (
         <button
-          key={c.id}
+          key={c?.id || index}
           className=
     {`${c.id === categoryId ? 'bg-slate-600 text-white' :'bg-white text-slate-500'} 
        
@@ -35,4 +31,4 @@ const ButtonList = ({category, categoryId, setCategoryId}) => {
   );
 };
 
-export default ButtonList;
+export default React.memo(ButtonList);

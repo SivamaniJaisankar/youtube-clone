@@ -10,11 +10,12 @@ import MobileWarning from "./components/MobileWarning";
 
 
 const AppLayout = () => {
+
   return (
     <Provider store={store}>
     <MenuProvider>
     <MobileWarning />
-    <div className="overflow-y-scroll hide-scrollbar">
+    <div className={`overflow-y-scroll hide-scrollbar`}>
         <Header />
         <Outlet />
       </div>

@@ -1,6 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
-import { formatNumber } from "../utils/helper";
+import React, { useState, useContext } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { formatDistanceToNow } from "date-fns";
@@ -9,9 +7,9 @@ import MenuContext from "../utils/MenuContext";
 const CommentList = ({ comment }) => {
 
   const [viewReply, setViewReply] = useState(false);
-  const { theme, showSidebar } = useContext(MenuContext);
+  const { theme } = useContext(MenuContext);
 
-  const autheorImage =
+  const authorImage =
     comment?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl ||
     comment?.snippet?.authorProfileImageUrl;
   const authorName =
@@ -25,18 +23,15 @@ const CommentList = ({ comment }) => {
     comment?.snippet?.textOriginal;
   const likeCount = comment?.snippet?.topLevelComment?.snippet?.likeCount || comment?.snippet?.likeCount;
 
+  const themeClass = theme === "light" ? "bg-white text-slate-800" : "bg-slate-800 text-white"
   return (
     <div
-      className={`w-12/12 ${
-        theme === "light"
-          ? "bg-white text-slate-800"
-          : "bg-slate-800 text-white"
-      }`}
+      className={`w-full ${themeClass}`}
     >
       <div className="flex">
         <div className="w-1/12 mx-auto flex items-center justify-center">
           <img
-            src={autheorImage}
+            src={authorImage}
             alt="Profile Image"
             className="rounded-3xl h-7 sm:h-9 w-7 sm:w-9 text-sm cursor-pointer"
           />
@@ -46,7 +41,7 @@ const CommentList = ({ comment }) => {
             <p className="text-xs font-semibold font-roboto">{authorName}</p>
           
             <p className="text-xs font-light font-roboto">
-              {formatDistanceToNow(new Date(updatedTime), { addSuffix: true })}
+              {updatedTime && formatDistanceToNow(new Date(updatedTime), { addSuffix: true })}
             </p>
             
           </div>
@@ -72,8 +67,8 @@ const CommentList = ({ comment }) => {
             >
               {viewReply ? 'Hide Reply' : 'View Reply...'}
             </p>
-            {viewReply && comment?.replies?.comments.map((c) =>(
-              <CommentList comment={c}/>
+            {viewReply && comment?.replies?.comments.map((c, index) =>(
+              <CommentList key={c.id || index} comment={c}/>
             ))}
             </>
           )}
@@ -82,4 +77,4 @@ const CommentList = ({ comment }) => {
   );
 };
 
-export default CommentList;
+export default React.memo(CommentList);

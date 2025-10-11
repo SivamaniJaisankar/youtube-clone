@@ -7,11 +7,8 @@ const {isMobile, setIsMobile, setShowSidebar} = useContext(MenuContext);
 const [showPopup, setShowPopup] = useState(false);
 
  useEffect(()=>{
-
-   
-        const userAgent = navigator.userAgent.toLowerCase();
-        console.log(userAgent)
-        const mobileCheck = /android|iphone|ipad|ipod|opera mini|iemobile|wpdesktop/.test(userAgent);
+    const userAgent = navigator.userAgent.toLowerCase();
+    const mobileCheck = /android|iphone|ipad|ipod|opera mini|iemobile|wpdesktop/.test(userAgent);
 
     if(mobileCheck) {
         setIsMobile(true);
@@ -22,13 +19,7 @@ const [showPopup, setShowPopup] = useState(false);
         setShowSidebar(true)
     }
 
-    
-    
- },[])
-
-
-console.log(isMobile, showPopup);
-
+},[])
 
  if(!isMobile || !showPopup) return null;
 

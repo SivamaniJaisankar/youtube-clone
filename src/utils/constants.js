@@ -1,6 +1,6 @@
-const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+export const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
-export const YOUTUBE_LOGO = "https://brandlogos.net/wp-content/uploads/2020/03/YouTube-logo-png-512x512.png"
+export const YOUTUBE_LOGO = "https://cdn-icons-png.flaticon.com/512/777/777242.png"
 
 export const REGION_CODE = "IN";
 
