@@ -1,6 +1,11 @@
 🎥 Streaming Site – Video Streaming Platform
 
 A responsive video streaming web application built with React, Redux Toolkit, and Tailwind CSS, featuring live chat simulation, dynamic video feeds, and nested comment threads.
+
+
+🚀 Live Demo
+  
+    🔗 View Deployed App
   
 
 🧠 **Tech Stack**
@@ -68,5 +73,3 @@ A responsive video streaming web application built with React, Redux Toolkit, an
       - Live Chat
       
       - Video Suggestions
-
-
